@@ -2,13 +2,14 @@ import { Box } from "@chakra-ui/react";
 import { useState } from "react";
 import { getCoreRowModel, useReactTable, flexRender } from "@tanstack/react-table";
 import DATA from "../data";
+import EditableCell from "./EditableCell";
 
 const columns = [
   {
     accessorKey: "task",
     header: "Task",
     size: 225,
-    cell: (props) => <p>{props.getValue()}</p>,
+    cell: EditableCell
   },
   {
     accessorKey: "status",
