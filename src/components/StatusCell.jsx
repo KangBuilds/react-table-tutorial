@@ -1,18 +1,20 @@
 import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { STATUSES } from "../data";
 
 const StatusCell = ({ getValue, row, column, table }) => {
   const { name, color } = getValue() || {};
+  const { updateData } = table.options.meta
   return (
     <Menu isLazy offset={[0, 0]} flip={false} autoSelect={false}>
       <MenuButton h="100%" w="100%" textAlign="left" p={1.5} bg={color || "transparent"} color="gray.900">
         {name}
       </MenuButton>
       <MenuList>
-        <MenuItem>Download</MenuItem>
-        <MenuItem>Create a Copy</MenuItem>
-        <MenuItem>Mark as Draft</MenuItem>
-        <MenuItem>Delete</MenuItem>
-        <MenuItem>Attend a Workshop</MenuItem>
+        {STATUSES.map(status => 
+            <MenuItem onClick={ () => updateData(row.index, column.id, status)} key={status.id}>
+                {status.name}
+            </MenuItem>
+        )}
       </MenuList>
     </Menu>
   );
