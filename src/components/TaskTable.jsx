@@ -7,6 +7,7 @@ const columns = [
   {
     accessorKey: "task",
     header: "Task",
+    size: 225,
     cell: (props) => <p>{props.getValue()}</p>,
   },
   {
