@@ -34,9 +34,23 @@ const TaskTable = () => {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    columnResizeMode: "onChange"
+    columnResizeMode: "onChange",
+    meta: {
+      updateData: (rowIndex, columnId, value) =>
+        setData((prev) =>
+          prev.map((row, index) =>
+            index === rowIndex
+              ? {
+                  ...prev[rowIndex],
+                  [columnId]: value,
+                }
+              : row
+          )
+        ),
+    },
   });
   // console.log(table.getHeaderGroups());
+  console.log(data)
   return (
     <Box>
       <Box className="table" w={(table.getTotalSize())}>
