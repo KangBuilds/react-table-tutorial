@@ -36,11 +36,11 @@ const TaskTable = () => {
   // console.log(table.getHeaderGroups());
   return (
     <Box>
-      <Box className="table">
+      <Box className="table" w={(table.getTotalSize())}>
         {table.getHeaderGroups().map((headerGroup) => (
           <Box className="tr" key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
-              <Box className="th" key={header.id}>
+              <Box className="th" w={header.getSize()} key={header.id}>
                 {header.column.columnDef.header}
               </Box>
             ))}
@@ -49,7 +49,7 @@ const TaskTable = () => {
         {table.getRowModel().rows.map((row) => (
           <Box className="tr" key={row.id}>
             {row.getVisibleCells().map((cell) => (
-              <Box className="td" key={cell.id}>
+              <Box className="td" w={cell.column.getSize()} key={cell.id}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </Box>
             ))}
