@@ -3,18 +3,19 @@ import { useState } from "react";
 import { getCoreRowModel, useReactTable, flexRender } from "@tanstack/react-table";
 import DATA from "../data";
 import EditableCell from "./EditableCell";
+import StatusCell from "./StatusCell";
 
 const columns = [
   {
     accessorKey: "task",
     header: "Task",
     size: 225,
-    cell: EditableCell
+    cell: EditableCell,
   },
   {
     accessorKey: "status",
     header: "Status",
-    cell: (props) => <p>{props.getValue()?.name}</p>,
+    cell: StatusCell,
   },
   {
     accessorKey: "due",
