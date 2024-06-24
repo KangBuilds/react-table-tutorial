@@ -1,8 +1,9 @@
 import { Input } from "@chakra-ui/react";
 import { useState } from "react";
 
-const EditableCell = () => {
-  const [value, setValue] = useState("");
+const EditableCell = ({getValue}) => {
+  const initialValue = getValue()
+  const [value, setValue] = useState(initialValue);
 
   return (
     <Input
