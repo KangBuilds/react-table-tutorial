@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { useState } from "react";
-import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { getCoreRowModel, useReactTable, flexRender } from "@tanstack/react-table";
 import DATA from "../data";
 
 const columns = [
@@ -12,12 +12,12 @@ const columns = [
   {
     accessorKey: "status",
     header: "Status",
-    cell: (props) => <p>{props.getValue()}</p>,
+    cell: (props) => <p>{props.getValue()?.name}</p>,
   },
   {
     accessorKey: "due",
     header: "Due",
-    cell: (props) => <p>{props.getValue()}</p>,
+    cell: (props) => <p>{props.getValue()?.toLocaleTimeString()}</p>,
   },
   {
     accessorKey: "notes",
@@ -42,6 +42,15 @@ const TaskTable = () => {
             {headerGroup.headers.map((header) => (
               <Box className="th" key={header.id}>
                 {header.column.columnDef.header}
+              </Box>
+            ))}
+          </Box>
+        ))}
+        {table.getRowModel().rows.map((row) => (
+          <Box className="tr" key={row.id}>
+            {row.getVisibleCells().map((cell) => (
+              <Box className="td" key={cell.id}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </Box>
             ))}
           </Box>
