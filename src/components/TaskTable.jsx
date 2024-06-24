@@ -32,6 +32,7 @@ const TaskTable = () => {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    columnResizeMode: "onChange"
   });
   // console.log(table.getHeaderGroups());
   return (
@@ -42,6 +43,10 @@ const TaskTable = () => {
             {headerGroup.headers.map((header) => (
               <Box className="th" w={header.getSize()} key={header.id}>
                 {header.column.columnDef.header}
+                <Box 
+                  onMouseDown={header.getResizeHandler()}
+                  onTouchStart={header.getResizeHandler()}
+                  className={`resizer ${ header.column.getIsResizing() ? "isResizing" : ""}`} />
               </Box>
             ))}
           </Box>
